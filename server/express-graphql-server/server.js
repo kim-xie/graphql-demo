@@ -1,30 +1,23 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
+const schema = require('./schema/index.js')
 
 // 使用 GraphQL Schema Language 创建一个 schema
-const schema = buildSchema(`
-  type Query {
-    hello: String
-    world: String
-  }
-`);
+// const schema = buildSchema(`
+//   type Query {
+//     hello: String
+//     world: String
+//   }
+// `);
 
 // root 提供所有 API 入口端点相应的解析器函数
-const root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-  world: () => {
-    return ' world!';
-  },
-};
+
 
 const app = express();
 
 app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
+  schema,
   graphiql: true,
 }));
 
