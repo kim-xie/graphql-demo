@@ -110,8 +110,13 @@ const typeDefs = gql`
     # date: Date
   }
 
+  type User {
+    name: String @upper
+  }
+
   type Query {
     books: [Book]
+    users: [User]
   }
 `;
 

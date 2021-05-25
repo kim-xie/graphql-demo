@@ -11,9 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-datasource-mongodb": "^0.4.0",
     "apollo-server": "^2.24.0",
     "apollo-server-express": "^2.24.0",
+    "datasource-sql": "^1.4.1",
     "express": "^4.17.1",
-    "graphql": "^15.5.0"
+    "graphql": "^15.5.0",
+    "mongodb": "^3.6.6",
+    "mysql": "^2.18.1"
   }
 }

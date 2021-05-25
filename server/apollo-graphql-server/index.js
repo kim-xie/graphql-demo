@@ -1,6 +1,8 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const schema = require('./schema');
+// const dataSources = require('./datasources/mongodb')
+const db = require('./datasources/mysql/mysql.config')
 
 const mocks = {
   Int: () => 6,
@@ -12,7 +14,8 @@ async function startApolloServer() {
   const app = express();
   const server = new ApolloServer({
     schema,
-    mocks, // Note: If typeDefs has custom scalar types, resolvers must still contain the serialize, parseValue, and parseLiteral functions
+    dataSources: () => ({ db }),
+    // mocks,
   });
   await server.start();
 
