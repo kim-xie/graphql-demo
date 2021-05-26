@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start:express-graphql": "nodemon express-graphql-server.js",
+    "start:graphql": "nodemon graphql-server.js",
     "json:server": "json-server --watch ./datasource/db.json"
   },
   "keywords": [

@@ -17,23 +17,65 @@
       "age": 23,
       "companyId": "1",
       "id": "QcCG1-z"
+    },
+    {
+      "firstName": "kim2",
+      "age": 23,
+      "companyId": "1",
+      "id": "rmZz_g8"
+    },
+    {
+      "firstName": "kim2",
+      "age": 23,
+      "companyId": "1",
+      "id": "fE9WTOc"
+    },
+    {
+      "firstName": "kim2",
+      "age": 23,
+      "companyId": "1",
+      "id": "tnd6ONP"
+    },
+    {
+      "firstName": "kim2",
+      "age": 23,
+      "companyId": "1",
+      "id": "qvrJoVQ"
+    },
+    {
+      "firstName": "kim2",
+      "age": 23,
+      "companyId": "1",
+      "id": "rEt2rJ3"
     }
   ],
   "companies": [
     {
       "id": "1",
       "name": "顺丰科技",
-      "desc": "顺丰科技集团"
+      "desc": "顺丰科技集团",
+      "userIds": [
+        "12",
+        "13"
+      ]
     },
     {
       "id": "2",
       "name": "腾讯科技",
-      "desc": "腾讯科技"
+      "desc": "腾讯科技",
+      "userIds": [
+        "12",
+        "13"
+      ]
     },
     {
       "id": "3",
       "name": "字节跳动",
-      "desc": "字节跳动"
+      "desc": "字节跳动",
+      "userIds": [
+        "12",
+        "13"
+      ]
     }
   ]
 }
