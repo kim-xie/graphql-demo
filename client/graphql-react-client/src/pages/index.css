@@ -1,0 +1,33 @@
+.listWrap{
+  overflow: hidden;
+  width: 400px;
+  height: 180px;
+  border: 1px solid red;
+  margin: 100px auto;
+}
+@keyframes scrollUp{
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-60px);
+  }
+}
+.list-wrap{
+  margin: 0;
+  padding: 0;
+}
+
+.list-item{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  list-style: none;
+  border-bottom: 1px solid red;
+}
+.active{
+  animation: scrollUp 2s linear 0s;
+}
+.unActive{
+  transform: translateY(0);
+}
