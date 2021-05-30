@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": "12",
+      "name": "kim",
+      "age": 20,
+      "companyId": "1"
+    },
+    {
+      "id": "_Tu_-u2",
+      "name": "谢顶金2",
+      "companyId": "2"
+    },
+    {
+      "name": "谢顶金",
+      "companyId": "2",
+      "id": "4fW_4m-"
+    },
+    {
+      "name": "kim-xie",
+      "companyId": "3",
+      "id": "uLxef9y"
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "顺丰科技",
+      "desc": "顺丰科技集团",
+      "userIds": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "腾讯科技",
+      "desc": "腾讯科技",
+      "userIds": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "字节跳动",
+      "desc": "字节跳动",
+      "userIds": [
+        "12",
+        "13"
+      ]
+    }
+  ]
+}

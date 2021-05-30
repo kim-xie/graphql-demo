@@ -1,0 +1,36 @@
+{
+  "name": "express-graphql-server",
+  "version": "1.0.0",
+  "description": "express graphql",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:apollo-graphql": "nodemon apollo-graphql-server.js",
+    "start:express-graphql": "nodemon express-graphql-server.js",
+    "start:graphql": "nodemon graphql-server.js",
+    "start:restApi": "json-server --watch ./datasource/db.json"
+  },
+  "keywords": [
+    "graphql",
+    "express"
+  ],
+  "author": "kim",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-datasource-mongodb": "^0.4.1",
+    "apollo-server": "^2.25.0",
+    "apollo-server-express": "^2.25.0",
+    "axios": "^0.21.1",
+    "datasource-sql": "^1.4.1",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.0",
+    "json-server": "^0.16.3",
+    "lodash": "^4.17.21",
+    "mongodb": "^3.6.9",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
