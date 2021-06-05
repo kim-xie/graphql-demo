@@ -1,6 +1,6 @@
 const {gql} = require('apollo-server-express')
 /**
-Supported types
+Supported 8 types （Scalar、Object、Query、Mutation、Input、Enum、Union、Interface）
 
   Scalar types
 
@@ -40,7 +40,6 @@ Supported types
             Date: dateScalar
             // ...other resolvers...
           };
-
 
 
   Object types
@@ -107,6 +106,7 @@ const typeDefs = gql`
   type Company {
     id: String
     name: String @upper
+    users: [User]
     # date: Date
   }
 
@@ -116,19 +116,36 @@ const typeDefs = gql`
     company: Company
   }
 
+  type UserList {
+    data: [User],
+    total: Int
+  }
+
+  type CompanyList {
+    data: [Company],
+    total: Int
+  }
+
+  input GetUsersInputParams {
+    offset: Int!
+    limit: Int!
+  }
+
   # 查询操作
   type Query {
     getCompany(id: String,name: String): Company
     getUser(id: String,name: String): User
-    users: [User]
-    companies: [Company]
+    users(offset: Int,limit: Int): UserList
+    companies(offset: Int,limit: Int): CompanyList
   }
 
   # 更新操作 
   type Mutation {
-    addCompany(name: String!): Company
+    addCompany(name: String!,userIds: [String]): Company
+    updateCompany(id: String!,name: String,userIds:[String] ): Company
+    deleteCompany(id: String!): Company
     addUser(name: String!,companyId:String!): User
-    updateUser(id: String!,name: String,,companyId:String ): User
+    updateUser(id: String!,name: String,companyId:String ): User
     deleteUser(id: String!): User
   }
 `;

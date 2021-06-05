@@ -1,5 +1,5 @@
 import './App.css';
-import Index from './pages/index'
+// import Index from './pages/index'
 import Graphql from './pages/graphql'
 
 function App() {

@@ -1,23 +1,67 @@
 import { gql } from '@apollo/client';
 
 const COMPANY_LIST = gql`
-  query {
-    companies {
+  query getCompanies($offset: Int, $limit: Int){
+    companies(offset:$offset, limit:$limit) {
+      data {
+        id
+        name
+        users{
+          id
+          name
+        }
+      }
+      total
+    }
+  }
+`;
+
+const ADD_COMPANY = gql`
+  mutation addCompany($name: String!, $userIds: [String]) {
+    addCompany(name: $name, userIds: $userIds) {
+      id
+      name
+      users{
+        id
+        name
+      }
+    }
+  }
+`;
+
+const DELETE_COMPANY = gql`
+  mutation deleteCompany($id: String!) {
+    deleteCompany(id: $id) {
       id
       name
     }
   }
 `;
 
-const USER_LIST = gql`
-  query {
-    users {
+const UPDATE_COMPANY = gql`
+  mutation updateCompany($id: String!,$name: String!, $userIds: [String]) {
+    updateCompany(id: $id, name: $name, userIds: $userIds) {
       id
       name
-      company {
+      users{
         id
         name
       }
+    }
+  }
+`;
+
+const USER_LIST = gql`
+  query getUsers($offset: Int, $limit: Int){
+    users(offset:$offset, limit:$limit) {
+      data {
+        id
+        name
+        company{
+          name
+        }
+      }
+      total
     }
   }
 `;
@@ -58,6 +102,9 @@ const UPDATE_USER = gql`
 
 export {
   COMPANY_LIST,
+  ADD_COMPANY,
+  DELETE_COMPANY,
+  UPDATE_COMPANY,
   USER_LIST,
   DELETE_USER,
   ADD_USER,
