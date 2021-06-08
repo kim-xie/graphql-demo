@@ -1,6 +1,9 @@
-var { graphql, buildSchema } = require('graphql');
+const { graphql, buildSchema } = require('graphql');
  
-var schema = buildSchema(`
+/**
+ * 1、类型描述
+ */
+const schema = buildSchema(`
   type User {
     id: String
     name: String
@@ -13,13 +16,19 @@ var schema = buildSchema(`
   }
 `);
  
-var root = { 
+/**
+ * 2、resolver处理器
+ */
+const root = { 
   getUser: (args) => ({name: "kim1",id: "1"}), 
   addUser: (args) => {
     console.log("args",args)
   }
 };
 
+/**
+ * 3、查询语句
+ */
 const query = `
   query {
     getUser(id: "1"){
@@ -35,7 +44,9 @@ const mutation = `
     }
   }
 `
- 
+/**
+ * 4、执行
+ */
 graphql(schema, query || mutation, root).then((response) => {
   console.log('response', response);
 });

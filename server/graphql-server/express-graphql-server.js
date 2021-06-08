@@ -31,16 +31,18 @@ const root = {
   
 };
 
+// 中间件拦截
 const loggingMiddleware = (req, res, next) => {
-  console.log('loggingMiddleware:');
+  console.log('loggingMiddleware:',req);
   next();
 }
 
 const app = express();
 
-// 中间件
+// 使用中间件
 app.use(loggingMiddleware);
 
+// 拦截/graphql请求
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
