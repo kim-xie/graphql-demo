@@ -21,6 +21,7 @@
     "apollo-server": "^2.25.0",
     "apollo-server-express": "^2.25.0",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "datasource-sql": "^1.4.1",
     "express": "^4.17.1",

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useRef, useEffect } from 'react'
+import axios from 'axios'
 import { useQuery, useMutation } from '@apollo/client'
 import {
 	COMPANY_LIST,
@@ -83,11 +84,11 @@ function AddUser(props) {
 	)
 }
 
+const limit = 5
 function UserList() {
 	const editRef = useRef()
 	const [visableModal, setVisableModal] = useState(false)
 	const [offset, setOffset] = useState(0)
-	const limit = 5
 	const { loading: queryLoading, error, data, refetch } = useQuery(
 		USER_LIST,
 		{
@@ -110,65 +111,67 @@ function UserList() {
 	}
 
 	const handleEdit = (row) => {
-		console.log('handleEdit', row)
 		editRef.current = row
 		setVisableModal(true)
   }
   
   const fetchData = async () => {
-    // await axios('http://localhost:4000/graphql',{
-    //   operationName:"getUsers",
-    //   variables: {
-		// 		offset,
-		// 		limit,
-		// 	},
-    //   query:`query getUsers($offset: Int, $limit: Int){
-    //           users(offset:$offset, limit:$limit) {
-    //             data {
-    //               id
-    //               name
-    //               company{
-    //                 name
-    //               }
-    //             }
-    //             total
-    //           }
-    //         }`
-    //   }
-    // ).then(res => console.log('res',res))
-
-    const response = await fetch(
-      'http://localhost:4000/graphql',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `token xxxx`,
-        },
-        body: `query getUsers($offset: Int, $limit: Int){
-                users(offset:$offset, limit:$limit) {
-                  data {
-                    id
+    await axios.post('http://localhost:4000/graphql',{
+      operationName:"getUsers",
+      variables: {
+				offset:0,
+				limit:5,
+			},
+      query:`query getUsers($offset: Int, $limit: Int){
+              users(offset:$offset, limit:$limit) {
+                data {
+                  id
+                  name
+                  company{
                     name
-                    company{
-                      name
-                    }
                   }
-                  total
                 }
-              }`
+                total
+              }
+            }`
       }
-    );
-    console.log('response',response)
-    // body = await response.json();
-    // return {
-    //   status: response.status,
-    //   ok: response.ok,
-    //   body: body.data,
-    // };
+    ).then(res => console.log('res',res))
+
+    // await fetch(
+    //   'http://localhost:4000/graphql',
+    //   {
+    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    //     mode: 'cors', // no-cors, cors, *same-origin
+    //     headers: {
+    //       'content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       operationName:"getUsers",
+    //       variables: {
+    //         offset:0,
+    //         limit:5,
+    //       },
+    //       query:`query getUsers($offset: Int, $limit: Int){
+    //               users(offset:$offset, limit:$limit) {
+    //                 data {
+    //                   id
+    //                   name
+    //                   company{
+    //                     name
+    //                   }
+    //                 }
+    //                 total
+    //               }
+    //             }`
+    //       })
+    //   }
+    // ).then(res => {
+    //   console.log('res',res.json())
+    // })
   }
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
   },[])
 
 	if (queryLoading) return <p>Loading...</p>
@@ -236,15 +239,15 @@ function UserList() {
 									? undefined
 									: () => {
 											refetch({
-                          offset: offset - limit,
+                          offset: offset - 1,
                           limit
 											}).then((res) => {
-												setOffset((offset) => offset - limit)
+												setOffset((offset) => offset - 1)
 											})
 									  }
 							}
 						>
-							<a className="page-link" href="#">
+							<a className="page-link" >
 								&laquo;
 							</a>
 						</li>
@@ -256,18 +259,18 @@ function UserList() {
 									<li
 										key={index}
 										className={`page-item ${
-											Math.floor(offset / limit) === index && 'active'
+											offset === index && 'active'
 										}`}
 										onClick={() => {
 											refetch({
-                          offset: index * limit,
+                          offset: index,
                           limit
 											}).then((res) => {
-												setOffset(index * limit)
+												setOffset(index)
 											})
 										}}
 									>
-										<a className="page-link" href="#">
+										<a className="page-link" >
 											{index + 1}
 										</a>
 									</li>
@@ -283,15 +286,15 @@ function UserList() {
 									? undefined
 									: () => {
 											refetch({
-                          offset: offset + (limit-1),
+                          offset: offset + 1,
                           limit
 											}).then((res) => {
-												setOffset((offset) => offset + (limit-1))
+												setOffset((offset) => offset + 1)
 											})
 									  }
 							}
 						>
-							<a className="page-link" href="#">
+							<a className="page-link" >
 								&raquo;
 							</a>
 						</li>
