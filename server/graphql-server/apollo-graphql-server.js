@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const { ApolloServer } = require('apollo-server-express');
 const schema = require('./schema');
 const db = require('./datasource/mysql/mysql.config')
@@ -59,6 +60,8 @@ async function startApolloServer() {
 
   await server.start();
 
+  app.use(cors())
+  
   server.applyMiddleware({ app });
 
   await new Promise(resolve => app.listen({ port: 4000 }, resolve));

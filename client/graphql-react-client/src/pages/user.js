@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import {
 	COMPANY_LIST,
@@ -87,7 +87,7 @@ function UserList() {
 	const editRef = useRef()
 	const [visableModal, setVisableModal] = useState(false)
 	const [offset, setOffset] = useState(0)
-	const [limit, setLimit] = useState(5)
+	const limit = 5
 	const { loading: queryLoading, error, data, refetch } = useQuery(
 		USER_LIST,
 		{
@@ -113,7 +113,63 @@ function UserList() {
 		console.log('handleEdit', row)
 		editRef.current = row
 		setVisableModal(true)
-	}
+  }
+  
+  const fetchData = async () => {
+    // await axios('http://localhost:4000/graphql',{
+    //   operationName:"getUsers",
+    //   variables: {
+		// 		offset,
+		// 		limit,
+		// 	},
+    //   query:`query getUsers($offset: Int, $limit: Int){
+    //           users(offset:$offset, limit:$limit) {
+    //             data {
+    //               id
+    //               name
+    //               company{
+    //                 name
+    //               }
+    //             }
+    //             total
+    //           }
+    //         }`
+    //   }
+    // ).then(res => console.log('res',res))
+
+    const response = await fetch(
+      'http://localhost:4000/graphql',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `token xxxx`,
+        },
+        body: `query getUsers($offset: Int, $limit: Int){
+                users(offset:$offset, limit:$limit) {
+                  data {
+                    id
+                    name
+                    company{
+                      name
+                    }
+                  }
+                  total
+                }
+              }`
+      }
+    );
+    console.log('response',response)
+    // body = await response.json();
+    // return {
+    //   status: response.status,
+    //   ok: response.ok,
+    //   body: body.data,
+    // };
+  }
+
+  useEffect(() => {
+    fetchData()
+  },[])
 
 	if (queryLoading) return <p>Loading...</p>
 	if (error) return <p>`Error! ${error}`(</p>

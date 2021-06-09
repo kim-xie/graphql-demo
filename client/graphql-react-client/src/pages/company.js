@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import {
 	COMPANY_LIST,
-	USER_LIST,
 	DELETE_COMPANY,
 	ADD_COMPANY,
 	UPDATE_COMPANY,
@@ -19,7 +18,7 @@ function AddCompany(props) {
     if (props.data) {
       nameRef.current.value = props.data.name
     }
-  },[])
+  },[props.data])
 	return (
 		<>
 			{mutationLoading && <p>mutationLoading...</p>}
@@ -75,7 +74,7 @@ function CompanyList() {
 	const editRef = useRef()
 	const [visableModal, setVisableModal] = useState(false)
 	const [offset, setOffset] = useState(0)
-	const [limit, setLimit] = useState(10)
+	const limit = 10
 	const { loading: queryLoading, error, data, refetch } = useQuery(
 		COMPANY_LIST,
 		{
